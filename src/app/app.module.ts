@@ -10,12 +10,29 @@ import { ContarClicksDirective } from './directives/contar-clicks.directive';
 import { Routes, RouterModule } from '@angular/router'
 import { DetalleComponent } from './detalle/detalle.component';
 import { LugaresComponent } from './lugares/lugares.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { LugaresService } from './services/lugares.service';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { CrearComponent } from './crear/crear.component';
+import { HttpModule } from '@angular/http';
+
 const appRoutes: Routes = [
   {path:'', component: LugaresComponent},
   {path:'lugares', component: LugaresComponent},
-  {path:'detalle/:id', component: DetalleComponent}
+  {path:'detalle/:id', component: DetalleComponent},
+  {path:'contacto', component: ContactoComponent},
+  {path:'crear', component: CrearComponent}
 ];
 
+export const firebaseConfig = {
+  apiKey: "AIzaSyD4o_ehKnkB0Z4Cbjn39aKRbodGk7SuzPA",
+  authDomain: "platzisquare-1518555588141.firebaseapp.com",
+  databaseURL: "https://platzisquare-1518555588141.firebaseio.com",
+  storageBucket: "platzisquare-1518555588141.appspot.com",
+  messagingSenderId: "804257387696"
+};
 
 @NgModule({
   declarations: [
@@ -23,17 +40,24 @@ const appRoutes: Routes = [
     ResaltarDirective,
     ContarClicksDirective,
     DetalleComponent,
-    LugaresComponent
+    LugaresComponent,
+    ContactoComponent,
+    CrearComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
-    FormsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDquatAK3a215qBGsH8GrStxsx-0n0h_qo'
-    })
+    }),
+    RouterModule.forRoot(appRoutes),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    FormsModule,
+    HttpModule
+    
   ],
-  providers: [],
+  providers: [LugaresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
