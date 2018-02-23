@@ -9,9 +9,13 @@
         <a class="btn btn-primary" routerLink="/crear/new">Crear nuevo negocio</a>
         <ul class="list-group">
           <ng-container *ngFor="let lugar of lugares">
-            <a routerLink="/crear/{{lugar.id}}">
-                <li class="list-group-item">{{lugar.nombre}}</li>
-            </a>
+            <li class="list-group-item">
+              <a routerLink="/crear/{{lugar.id}}"><h3>{{lugar.nombre | uppercase}}</h3></a>
+                <br />
+                <small>Creado: {{lugar.id | date:'short' | uppercase}}</small>
+                <br />
+                {{'12345.29324557' | number: '1.2-2'}}
+            </li>
           </ng-container>
         </ul>
       </div>
@@ -19,7 +23,7 @@
         <h2>Personas viejas</h2>
         <ul class="list-group">
           <ng-container *ngFor="let persona of personas">
-              <li class="list-group-item" *ngIf="persona.edad > 18">{{persona.nombre}}</li>
+              <li class="list-group-item" *ngIf="persona.edad > 14">{{persona.nombre}}</li>
           </ng-container>
         </ul>
       </div>

@@ -18,8 +18,14 @@ export class LugaresComponent {
   lng:number = -75.5084285;
   lugares= null;
   constructor(private lugaresService: LugaresService){
-    lugaresService.getLugares().valueChanges().subscribe(lugares => {
+    lugaresService.getLugares().subscribe(lugares => {
+      //this.lugares = lugares; // Traer lugares con sockets
       this.lugares = lugares;
+      var me = this;
+      me.lugares = Object.keys(me.lugares).map(function (key) {return me.lugares[key]; }); // Object to Array
+    }, error => {
+      console.log(error);
+      alert('Tenemos dificultades tecnicas, disculpe las molestias, Error: '+error.statusText);
     });
   }
 }

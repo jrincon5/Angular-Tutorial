@@ -22,7 +22,6 @@ export class CrearComponent {
   guardarLugar(){
     var direccion = this.lugar.calle+','+this.lugar.ciudad+','+this.lugar.pais;
     this.lugaresServices.obtenerGeoData(direccion).subscribe((result) => {
-      //debugger;
       this.lugar.lat = result.json().results[0].geometry.location.lat;
       this.lugar.lng = result.json().results[0].geometry.location.lng;
       if(this.id != 'new'){
