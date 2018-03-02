@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, trigger, state, style } from '@angular/core';
 import { LugaresService } from '../services/lugares.service';
 
 @Component({
   selector: 'app-lugares',
-  templateUrl: './lugares.component.html'
+  templateUrl: './lugares.component.html',
+  animations: [
+    trigger('contenedorAnimable', [
+      state('inicial', style({
+        opacity: 0,
+        backgroundColor: 'green',
+        transform: 'rotate3d'
+      }))
+    ])
+  ]
 })
 export class LugaresComponent {
   title = 'PlatziSquare';
